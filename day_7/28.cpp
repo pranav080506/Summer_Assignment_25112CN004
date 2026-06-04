@@ -13,6 +13,6 @@ int main(){
     cout<<"enter a number: ";
     cin>>n;
 
-    cout<<"reverse of the number " << n <<"is "<< reverseNumber(n);
+    cout<<"reverse of the number " << n <<"is "<< reverseNumber(n)<<endl;
     return 0;
 }
