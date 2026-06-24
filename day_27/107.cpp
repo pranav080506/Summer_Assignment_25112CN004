@@ -1,108 +1,114 @@
 #include <iostream>
 using namespace std;
 
-class Ticket {
-public:
-    int seatNo;
-    string name;
-    bool booked;
+class SalaryManagement {
+    int empId[100], count = 0;
+    string name[100];
+    float basic[100], hra[100], da[100], salary[100];
 
-    Ticket() {
-        booked = false;
+public:
+    void addEmployee() {
+        cout << "\nEnter Employee ID: ";
+        cin >> empId[count];
+
+        cin.ignore();
+        cout << "Enter Employee Name: ";
+        getline(cin, name[count]);
+
+        cout << "Enter Basic Salary: ";
+        cin >> basic[count];
+
+        // HRA = 20% of Basic
+        hra[count] = basic[count] * 0.20;
+
+        // DA = 10% of Basic
+        da[count] = basic[count] * 0.10;
+
+        salary[count] = basic[count] + hra[count] + da[count];
+
+        count++;
+
+        cout << "Employee Added Successfully!\n";
+    }
+
+    void displayEmployees() {
+        if (count == 0) {
+            cout << "\nNo Employee Records Found.\n";
+            return;
+        }
+
+        cout << "\n----- Employee Details -----\n";
+
+        for (int i = 0; i < count; i++) {
+            cout << "\nEmployee " << i + 1 << endl;
+            cout << "Employee ID : " << empId[i] << endl;
+            cout << "Name        : " << name[i] << endl;
+            cout << "Basic Pay   : " << basic[i] << endl;
+            cout << "HRA         : " << hra[i] << endl;
+            cout << "DA          : " << da[i] << endl;
+            cout << "Net Salary  : " << salary[i] << endl;
+        }
+    }
+
+    void searchEmployee() {
+        int id;
+
+        cout << "\nEnter Employee ID to Search: ";
+        cin >> id;
+
+        for (int i = 0; i < count; i++) {
+            if (empId[i] == id) {
+                cout << "\nEmployee Found\n";
+                cout << "Employee ID : " << empId[i] << endl;
+                cout << "Name        : " << name[i] << endl;
+                cout << "Basic Pay   : " << basic[i] << endl;
+                cout << "HRA         : " << hra[i] << endl;
+                cout << "DA          : " << da[i] << endl;
+                cout << "Net Salary  : " << salary[i] << endl;
+                return;
+            }
+        }
+
+        cout << "Employee Not Found.\n";
     }
 };
 
 int main() {
-    Ticket seats[10];
-    int choice, seat;
-    string name;
-
-    
-    for (int i = 0; i < 10; i++) {
-        seats[i].seatNo = i + 1;
-    }
+    SalaryManagement s;
+    int choice;
 
     do {
-        cout << "\n===== Ticket Booking System =====\n";
-        cout << "1. View Available Seats\n";
-        cout << "2. Book Ticket\n";
-        cout << "3. Cancel Ticket\n";
-        cout << "4. Display Booked Tickets\n";
-        cout << "5. Exit\n";
-        cout << "Enter Choice: ";
+        cout << "\n===== SALARY MANAGEMENT SYSTEM =====\n";
+        cout << "1. Add Employee\n";
+        cout << "2. Display Employees\n";
+        cout << "3. Search Employee\n";
+        cout << "4. Exit\n";
+
+        cout << "Enter Your Choice: ";
         cin >> choice;
 
         switch (choice) {
+            case 1:
+                s.addEmployee();
+                break;
 
-        case 1:
-            cout << "\nAvailable Seats:\n";
-            for (int i = 0; i < 10; i++) {
-                if (!seats[i].booked)
-                    cout << "Seat " << seats[i].seatNo << endl;
-            }
-            break;
+            case 2:
+                s.displayEmployees();
+                break;
 
-        case 2:
-            cout << "\nEnter Seat Number (1-10): ";
-            cin >> seat;
+            case 3:
+                s.searchEmployee();
+                break;
 
-            if (seat < 1 || seat > 10) {
-                cout << "Invalid Seat Number!\n";
-            }
-            else if (seats[seat - 1].booked) {
-                cout << "Seat Already Booked!\n";
-            }
-            else {
-                cin.ignore();
+            case 4:
+                cout << "Program Ended.\n";
+                break;
 
-                cout << "Enter Passenger Name: ";
-                getline(cin, name);
-
-                seats[seat - 1].name = name;
-                seats[seat - 1].booked = true;
-
-                cout << "Ticket Booked Successfully!\n";
-            }
-            break;
-
-        case 3:
-            cout << "\nEnter Seat Number to Cancel: ";
-            cin >> seat;
-
-            if (seat < 1 || seat > 10) {
-                cout << "Invalid Seat Number!\n";
-            }
-            else if (!seats[seat - 1].booked) {
-                cout << "Seat is Not Booked.\n";
-            }
-            else {
-                seats[seat - 1].booked = false;
-                seats[seat - 1].name = "";
-
-                cout << "Ticket Cancelled Successfully!\n";
-            }
-            break;
-
-        case 4:
-            cout << "\nBooked Tickets:\n";
-
-            for (int i = 0; i < 10; i++) {
-                if (seats[i].booked) {
-                    cout << "Seat No : " << seats[i].seatNo
-                         << "\tPassenger : " << seats[i].name << endl;
-                }
-            }
-            break;
-
-        case 5:
-            cout << "\nThank You!\n";
-            break;
-
-        default:
-            cout << "\nInvalid Choice!\n";
+            default:
+                cout << "Invalid Choice!\n";
         }
 
-    } while (choice != 5);
+    } while (choice != 4);
 
     return 0;
 }
