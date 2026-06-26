@@ -12,7 +12,7 @@ struct Employee{
 Employee emp[100];
 int n = 0;
 
-// Function Prototypes
+
 void addEmployee();
 void displayEmployee();
 void searchEmployee();
@@ -70,7 +70,7 @@ int main(){
 }
 
 
-// Add Employee
+
 void addEmployee(){
 
     cout<<"Enter Employee ID : ";
@@ -92,7 +92,7 @@ void addEmployee(){
 }
 
 
-// Display Employees
+
 void displayEmployee(){
 
     if(n==0){
@@ -112,7 +112,7 @@ void displayEmployee(){
 }
 
 
-// Search Employee
+
 void searchEmployee(){
 
     int id;
@@ -142,7 +142,7 @@ void searchEmployee(){
 }
 
 
-// Update Employee
+
 void updateEmployee(){
 
     int id;
@@ -177,7 +177,7 @@ void updateEmployee(){
 }
 
 
-// Delete Employee
+
 void deleteEmployee(){
 
     int id;
